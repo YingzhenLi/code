@@ -1,0 +1,72 @@
+#!/usr/bin/python
+#-*-coding:utf-8-*-
+
+def get_user_key(userID, dictData):
+    """通过userID，在dictData中找到user对应的keyword:weight数据，
+    dictData为dataImport中import('user_key_word')返回的字典对象"""
+    if userID in dictData:
+        return dictData[userID]
+    else:
+        return None
+
+def get_class(key, listData):
+    """找到key所属的class编号,listData 为import('data_keyword_class')返回的列表"""
+    N = len(listData)
+    for ii in range(0, N-1):
+        if key in listData[ii]:
+            return ii
+    else:
+        return None  #如果key不在listData 中，那我们返回None
+
+def get_user_key_class(userID, dictData, listData):
+    """找到user所有的keyword， 对所有keyword"""
+    keysDict = get_user_key(userID, dictData)
+    #这里应该是get_user_key而不是get_user_key_class,不然就陷入迭代黑洞了
+    ResultDict = dict()
+    if keysDict is None:
+        return None   #如果user无法在user_key_word中找到对应的关键词，返回None
+    TempDict = dict()
+    for key in keysDict.keys():
+        index = get_class(key, listData) #之前会出现-1是因为get_class用-1作非法的分类关键词，现在如果在data_keyword_class中找不到key，那么就返回None，下面的if语句作用是：如果返回None，就直接pass，不作任何动作；
+        if index is None:
+            pass  #我觉得，有个危险的地方，如果一个user所有keyword都不能在data_keyword_class中找到，那么get_user_key_class也会返回一个None, 所以也修改了get_class_weight
+        else:
+            TempDict[key] = index
+    
+    for index in TempDict.values():
+        ResultDict[index] = {} 
+        #这一步可以确定keyword能分成多少类，并把这些类初始化为空集
+    
+    for key in TempDict:
+        # dict has no attribute 'add'
+        #ResultDict[TempDict[key]].add(key)
+        # revise
+        ResultDict[TempDict[key]][key] = 0.0
+        
+    # 我直接把get_class_weight的内容写进来，因为我要获得的
+    # 是所有classID的权重而不是单个
+        
+    keyDict = get_user_key(userID, dictData)    
+    for classID in ResultDict:
+        for key in ResultDict[classID]:
+            ResultDict[classID][key] += keyDict[key]
+	ResultDict[classID] = sum(ResultDict[classID].values())
+    return ResultDict 
+    '''REVISE: return {class:{key:weight,...},...}'''    
+    
+    #现在返回的ResultDict是一个字典类，格式：{classNumber:{key1,key2,...},...}；
+    #如果修改成return ResultDict.values()就可以返回一个列表，只包含{key1,key2,...}
+
+def get_class_weight(userID, dictData, listData, classID):
+    """获得user的keyword中属于classID的keyword的权重和"""
+    keyClasses = get_user_key_class(userID, dictData, listData)
+    if keyClasses is None: #如果get_user_key_class返回None，说明没有一个keyword可以找到其class，所以直接返回0
+        return 0
+    if classID not in keyClasses.keys():
+        return 0   #如果user的Keyword没有属于classID的，返回0
+    keyDict = get_user_key(userID, dictData)
+    class_weight = 0.0
+    for key in keyClasses[classID]:
+        class_weight += keyDict[key]
+    return class_weight
+

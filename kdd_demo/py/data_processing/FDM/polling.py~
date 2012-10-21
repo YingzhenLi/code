@@ -1,0 +1,45 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Apr 14 20:38:45 2012
+class polling
+@author: Yingzhen Li, KDD@SYSU
+"""
+
+class polling:
+     
+    '''insert into large_site'''
+    @staticmethod
+    def insert(tranAndSup, remoteJ = 1, local_pruning = [], large_site = {}):
+        transaction = tranAndSup[0]
+        if transaction not in local_pruning:
+            local_pruning.append(transaction)
+        if transaction not in large_site:
+            large_site[transaction] = [remoteJ]
+        else:
+            large_site[transaction].append(remoteJ)
+        return local_pruning, large_site         
+    
+    '''generate global_set'''
+    @staticmethod
+    def gen_global_set (Transaction, size, NORM, SUP = 0.5, local_pruning = []):
+        global_set = []
+	global_set_supp = []
+        for transaction in local_pruning:
+            global_support = 0
+            '''cumpute global support of item'''
+            for siteJ in range(size):
+                if transaction in Transaction[siteJ]:
+                    '''item is in the remote siteJ's Transaction'''
+                    global_support += Transaction[siteJ][transaction]
+            '''judge if item is global large'''
+            if global_support >= SUP * NORM:
+                global_set.append(transaction)
+		global_set_supp.append(global_support)
+	result = [global_set, global_set_supp]
+	print result
+        return result
+    
+
+        
+ 
+            

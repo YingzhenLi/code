@@ -1,0 +1,23 @@
+==============================================================
+			demo notes:
+==============================================================
+1. if you want to have a light experiment, please run TRAIN_PREDICTION.py in the ~/py directory and check 'data_output_evaluation' in the same directory; if you want to check our result please refer to file ~/test_result/data_output_evaluation;
+
+2. to save time we provided dataset extracted from the original dataset of KDD Cup 2012, sampling over 5,000 users' profiles and did pre-processing;
+
+3. in order to perform cross-validation we splitted the original training set (from parts of data in rec_log_train.txt) to get files 'data_rec_log_train' and 'data_rec_log_test' (80% - 20%);
+
+4. the output vector of MAP@3 is ordered as [AP_FAKE, AP_INACTIVE, AP_ACTIVE];
+
+5. we doubt on the stability of our algorithm for these reasons:
+	i. we sampled data randomly, but the size of sampled data was not big enough due to the constraint of our 3-laptop distributed computation;
+	ii. we initial the parameters randomly in the training process and did nothing of overcoming the local optimum, which means that the training results in each experiments can be different, and the stuck in local optimum is possibile;
+	iii. the test set's size for each user may be too small;
+	iv. we really worry on the generalization problem since the data the organizor provided was weird and imcomplete, maybe not suitable of our combined algorithms to some extent, we sampled 3 set of data but still had similar phenonmena occurred;
+
+6. if you want to test our algorithm on the whole dataset, please contact us for collaboration since we really want to know the performance of our algorithm on the whole set;
+
+7. due to the restriction of uploading files' size we do not provide the original dataset for testing, please go to the official website to download the original dataset, and follow the instructions in 'instructions.txt' to run the codes;
+
+8. please contact us if any problem of testing in the large dataset;
+

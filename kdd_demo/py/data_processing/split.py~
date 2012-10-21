@@ -1,0 +1,36 @@
+#! usr/bin/python
+
+# cross-validation
+# split the file data_rec_log_train into training set and test set
+
+import IMPORT
+import cPickle
+import random
+
+fileNames = ['rec_log_train']
+DATA = IMPORT.IMPORT(fileNames)
+j = 0
+rec_log_test = {}
+for user in DATA['rec_log_train'].keys():
+	length = len(DATA['rec_log_train'][user].keys())
+	if length <= 3:		# we need at least 3 test items
+		print 'not enough items!' + user
+		j += 1	# count #user without enough test items
+		continue
+	num = max(int(length * 0.2), 3)	# cross-validation 80% - 20%, at least 3 items
+	rec_log_test[user] = {}
+	i = 0
+	while i < num:
+		rand = int(random.random() * length) 	# pick out #rand item
+		item = DATA['rec_log_train'][user].keys()[rand]
+		rec_log_test[user][item] = DATA['rec_log_train'][user][item]
+		DATA['rec_log_train'][user] .__delitem__(item)
+		i+= 1
+		length -= 1
+print  j, 'users have less then 3 items in the whole dataset'
+fw = open('data_rec_log_train', 'w')
+fw.write(cPickle.dumps(DATA['rec_log_train']))
+fw.close()
+fw = open('data_rec_log_test', 'w')
+fw.write(cPickle.dumps(rec_log_test))
+fw.close()

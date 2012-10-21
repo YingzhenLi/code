@@ -1,0 +1,14 @@
+===========================================================
+			note of FDM
+===========================================================
+1. please run Distributed_Apriori.py by
+mpirun -n #cores python Distributed_Apriori.py (&)(>your_log_name)
+(package mpich2/openmpi and mpi4py required)
+
+2. Serial_Apriori.py can also work, just type in
+python Serial_Apriori.py (&)(>your_log_name)
+but it takes a LONG LONG time;
+
+3. please run FDM codes in the same directory of the dataset;
+
+enjoy!

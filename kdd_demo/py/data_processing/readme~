@@ -1,0 +1,19 @@
+=================================================================
+			data processing
+=================================================================
+please run the py files in the same directory of the raw dataset as follows:
+	
+	i. run DATAIMPORTRAW.py -- loading data form the raw dataset (*.txt)
+	
+	ii. run Distributed_Apriori.py in ~/FDM folder -- keyword analysis
+	please run in the same directory of loaded dataset
+
+	iii. run CLASS_CATE.py -- keyword analysis
+
+	iv. run STATISTICS.py -- user taxonomy
+	this kind of taxonomy is based on the cut of the persentage, however, we discard this method and run user_class.py instead；
+
+	v. for cross-validation, run split.py
+
+any problems please first refer to instruction file;
+I still working on the organization of data in MySql database, in a few months I'll release the revised version;

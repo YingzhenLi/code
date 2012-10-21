@@ -1,0 +1,10 @@
+==============================================================
+			import data
+==============================================================
+1. run the py files to import data in the directory of *.txt files;
+
+2. delete # symbols to activate some codes;
+
+3. min_activeness = 100 and min_action = 20 maybe not appropriate: in our experiment we found out that fake users has much less than 20 interactions, and much more than 33.2% users had more than 100 tweets; (well, just the result of the sampling, we just assigned the parameters but never proof them)
+
+4. we provide our test data which has already been managed, so if you want to run the data import codes please run on the raw data (*.txt)

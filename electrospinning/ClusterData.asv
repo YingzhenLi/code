@@ -1,0 +1,8 @@
+[ZData12k5,mu,std]=zscore(data12k5);
+pdistData12k5=pdist(ZData12k5(:,4:7));
+L=linkage(pdistData12k5,'single');
+f1=dendrogram(L);
+C=cophenet(L,pdistData12k5);
+T=cluster(L,'maxclust',3);
+find(T==2);
+f2=scatter3(L(:,1),L(:,2),L(:,3),100,,'filled');

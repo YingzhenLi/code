@@ -1,0 +1,8 @@
+===============================================================
+			how to start
+===============================================================
+1. if you just want to test on the data provided by us, just run TRAIN_PREDICT.py;
+
+2. see readme files in ~/data_processing and ~/FDM for more information if you want to test from the very beginning;
+
+

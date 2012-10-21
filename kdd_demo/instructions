@@ -1,0 +1,30 @@
+==============================================================
+			instructions
+==============================================================
+please put the files(*.txt) of track1 dataset, rec_log_test.txt, sub_small_header.csv and the codes in the same directory, and run the codes in that directory as follows:
+
+1. run DATAIMPORTRAW.py -- loading data
+
+2. run Distributed_Apriori.py -- keyword analysis
+actually you can run it on a single core, if you want ro distribute it, please install mpi modules (mpich2, openmpi, etc.) and python module mpi4py, then type in the terminal as follows:
+mpirun -n #core python Distributed_Apriori.py (&)(>your_log_name)
+
+3. run CLASS_CATE.py -- keyword analysis
+
+4. run STATISTICS.py -- user taxonomy
+
+5. if you want to use cross-validation method, please run split.py for separating original training set, and rename the 2 output file as 'data_rec_log_train' and 'data_rec_log_test';
+
+5.5. run TRAIN_PREDICTION.py -- training and prediction, then you can check 'data_output_evaluation' for results;
+you can also run it on distributed cores, however I still working on solving the waiting problem of this test codes;
+
+6. parameters embeded in each file is changable, directly change it to see the results of different set of coefficients;
+
+7. you can test our algorithm directly on the original test set, please run train_prediction.py and upload the generated csv file on the official website, and get the MAP@3 of the recommendation; since we lost the computing support before we test our algorithm on the whole set, I'm not sure the code could work stably;
+
+==============================================================
+I'll take database course this semester, so I'll develop another version using database in a few months, if you're willing to help feel free to contact me.
+ 
+Any problems or comments please email to liyzhen2@gmail.com
+
+Enjoy!

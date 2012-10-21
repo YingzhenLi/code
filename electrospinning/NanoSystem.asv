@@ -1,0 +1,15 @@
+function [out,err,net]=NanoSystem(para,sheet,test)
+%UNTITLED5 Summary of this function goes here
+%   BP networks normalization
+%paratemp(:,1)=para(:,1)./10000;testtemp(:,1)=test(:,1)./10000;
+%paratemp(:,2)=para(:,2)./100;testtemp(:,1)=test(:,1)./100;
+%paratemp(:,3)=para(:3)./2750;testtemp(:,1)=test(:,1)./10000;
+%paratemp(:,4)=para(:,4)./20;testtemp(:,1)=test(:,1)./10000;
+%paratemp(:,5)=para(:,5)./20;testtemp(:,1)=test(:,1)./10000;
+paratemp=para;testtemp=test(:,1:6);
+net=NanoNeuralNet(paratemp',sheet');
+out=sim(net,testtemp')';
+%PNN networks
+%out=vec2ind(out);
+err=out-test(:,7:10);
+end
