@@ -1,0 +1,19 @@
+=========================================================
+			ver 0.1
+=========================================================
+1. Coures paper is written in Chinese, I'll release the document with details in English when the website development ends;
+
+2. 'panorama.c' has not been test because I have some trouble of MFC programming in Linux (before I used to develop MFC programs in Windows by using some developing environments like Visual Studio);
+
+3. in a few days I'll upload the rewritten codes in python;
+
+=========================================================
+			ver 0.2
+=========================================================
+1. python file panorama_keyboard.py is ready
+please run the py file in the same directory of the panorama (left_1.jpg)
+opencv and python package required
+
+note:
+i. use direction (up, down, left, right) to control the viewing
+ii. press esc to exit
